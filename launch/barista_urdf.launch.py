@@ -2,8 +2,12 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
+from launch.actions import ExecuteProcess, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command
 from launch_ros.actions import Node
+from ament_index_python.packages import get_package_prefix
+
 
 # this is the function launch  system will look for
 def generate_launch_description():
@@ -40,10 +44,18 @@ def generate_launch_description():
             parameters=[{'use_sim_time': True}],
             arguments=['-d', rviz_config_dir])
 
+    
+    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
+                        arguments=['-entity', 'my_box_bot', '-x', '1.0', '-y', '1.0', '-z', '0.2',
+                                   '-topic', 'robot_description'],
+                        output='screen')
+
     # create and return launch description object
     return LaunchDescription(
         [            
+            gazebo,
             robot_state_publisher_node,
-            rviz_node
+            rviz_node,
+            spawn_entity
         ]
     )
