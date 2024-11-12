@@ -15,6 +15,8 @@ find_package(gazebo_ros2_control REQUIRED)
 find_package(joint_state_broadcaster REQUIRED)
 find_package(joint_trajectory_controller REQUIRED)
 find_package(velocity_controllers REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(gazebo_ros REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -35,6 +37,8 @@ install(
     launch
     meshes
     config
+	worlds
+	models
   DESTINATION
     share/${PROJECT_NAME}/
 )
