@@ -7,6 +7,10 @@ Run the package
 
 	ros2 launch barista_robot_description barista_urdf.launch.py
 
-Execute in Webshell 2
+Execute in Webshell 2 to run joint_state_publisher_gui
 
 	ros2 run joint_state_publisher_gui joint_state_publisher_gui
+
+
+run teleop_twist_keyboard to drive the robot 
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard 

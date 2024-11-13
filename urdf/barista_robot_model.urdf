@@ -45,8 +45,8 @@
     </collision>
 
     <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.099230833" ixy="0" ixz="0" iyy="0.099230833" iyz="0" izz="0.15842"/>
+      <mass value="5"/>
+      <inertia ixx="0.04961541667" ixy="0" ixz="0" iyy="0.04961541667" iyz="0" izz="0.04961541667"/>
     </inertial>
 
   </link>
@@ -77,8 +77,8 @@
     </collision>
 
     <inertial>
-      <mass value="3"/>
-      <inertia ixx="0.025788" ixy="0" ixz="0" iyy="0.025788" iyz="0" izz="0.047526"/>
+      <mass value="2"/>
+      <inertia ixx="0.005064" ixy="0" ixz="0" iyy="0.005064" iyz="0" izz="0.0081"/>
     </inertial>
 
   </link>
@@ -109,8 +109,8 @@
     </collision>
 
     <inertial>
-      <mass value="0.5"/>
-      <inertia ixx="0.003266666667" ixy="0" ixz="0" iyy="0.003266666667" iyz="0" izz="0.0025"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0006533333333" ixy="0" ixz="0" iyy="0.0006533333333" iyz="0" izz="0.0005"/>
     </inertial>
 
   </link>
@@ -141,8 +141,8 @@
     </collision>
 
     <inertial>
-      <mass value="0.5"/>
-      <inertia ixx="0.003266666667" ixy="0" ixz="0" iyy="0.003266666667" iyz="0" izz="0.0025"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0006533333333" ixy="0" ixz="0" iyy="0.0006533333333" iyz="0" izz="0.0005"/>
     </inertial>
 
   </link>
@@ -173,8 +173,8 @@
     </collision>
 
     <inertial>
-      <mass value="0.5"/>
-      <inertia ixx="0.003266666667" ixy="0" ixz="0" iyy="0.003266666667" iyz="0" izz="0.0025"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0006533333333" ixy="0" ixz="0" iyy="0.0006533333333" iyz="0" izz="0.0005"/>
     </inertial>
 
   </link>
@@ -205,8 +205,8 @@
     </collision>
 
     <inertial>
-      <mass value="0.5"/>
-      <inertia ixx="0.003266666667" ixy="0" ixz="0" iyy="0.003266666667" iyz="0" izz="0.0025"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0006533333333" ixy="0" ixz="0" iyy="0.0006533333333" iyz="0" izz="0.0005"/>
     </inertial>
 
   </link>
@@ -632,7 +632,6 @@
 
   <gazebo reference="laser_scan_frame">
     <sensor name="sensor_ray" type="ray">
-        <frameName>laser_scan_frame</frameName>
         <pose>0 0 0 0 0 0</pose>
         <ray>
           <scan>
@@ -651,8 +650,7 @@
         <always_on>true</always_on>
         <visualize>true</visualize>
         <update_rate>100.0</update_rate>
-        <plugin name="laser_node" filename="libgazebo_ros_ray_sensor.so">
-        
+        <plugin name="laser_scan_node" filename="libgazebo_ros_ray_sensor.so">
           <ros>
             <remapping>~/out:=scan</remapping>
           </ros>
