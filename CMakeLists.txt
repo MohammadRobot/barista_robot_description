@@ -39,6 +39,7 @@ install(
     config
 	worlds
 	models
+	xacro
   DESTINATION
     share/${PROJECT_NAME}/
 )

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:property name="wheel_width" value="0.0206"/>
+<xacro:property name="wheel_radius" value="0.0352"/>
+
+<!-- Wheel Left -->
+<xacro:macro name="wheel" params="wheel_name">
+  <link name="${wheel_name}">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+
+      <collision>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <mass value="2"/>
+        <inertia ixx="0.000690247" ixy="0" ixz="0" iyy="0.000690247" iyz="0" izz="0.00123904"/>
+      </inertial>
+  </link>
+</xacro:macro>
+
+
+</robot>

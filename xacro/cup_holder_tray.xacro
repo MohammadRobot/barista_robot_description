@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:property name="cup_holde_tray_radius" value="0.178"/>
+<xacro:property name="cup_holde_tray_height" value="0.09"/>
+
+
+<!-- Cup holder tray -->
+<xacro:macro name="Cup_holder_tray" params="Cup_holder_tray_name">
+  <link name="${Cup_holder_tray_name}">
+    <visual>
+        <geometry>
+            <cylinder radius="${cup_holde_tray_radius}" length="${cup_holde_tray_height}"/>
+        </geometry>
+		<material name="blue"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${cup_holde_tray_radius}" length="${cup_holde_tray_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="2"/>
+      <inertia ixx="0.005064" ixy="0" ixz="0" iyy="0.005064" iyz="0" izz="0.0081"/>
+    </inertial>
+
+  </link>
+</xacro:macro>
+</robot>   
