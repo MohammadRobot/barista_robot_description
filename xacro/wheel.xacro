@@ -3,6 +3,7 @@
 
 <xacro:property name="wheel_width" value="0.0206"/>
 <xacro:property name="wheel_radius" value="0.0352"/>
+<xacro:property name="wheel_mass" value="2"/>
 
 <!-- Wheel Left -->
 <xacro:macro name="wheel" params="wheel_name">
@@ -24,11 +25,12 @@
 
       <inertial>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-        <mass value="2"/>
-        <inertia ixx="0.000690247" ixy="0" ixz="0" iyy="0.000690247" iyz="0" izz="0.00123904"/>
+        <mass value="${wheel_mass}"/>
+        <!-- <inertia ixx="0.000690247" ixy="0" ixz="0" iyy="0.000690247" iyz="0" izz="0.00123904"/> -->
+        <inertia  ixx="${wheel_mass*(3*wheel_radius*wheel_radius+wheel_width*wheel_width)/12}" ixy = "0" ixz = "0"
+        iyy="${wheel_mass*(3*wheel_radius*wheel_radius+wheel_width*wheel_width)/12}" iyz = "0"
+        izz="${wheel_mass*(wheel_radius*wheel_radius)/2}" />     
       </inertial>
   </link>
 </xacro:macro>
-
-
 </robot>

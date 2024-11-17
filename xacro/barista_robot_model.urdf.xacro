@@ -11,6 +11,9 @@
 
 <xacro:property name="body_radius" value="0.178"/>
 <xacro:property name="body_height" value="0.155"/>
+<xacro:property name="body_mass"   value= "5"/>
+
+<xacro:property name="wheel_separation" value = "0.3"/>
 
 
         
@@ -58,9 +61,14 @@
     </collision>
 
     <inertial>
-      <mass value="5"/>
-      <inertia ixx="0.04961541667" ixy="0" ixz="0" iyy="0.04961541667" iyz="0" izz="0.04961541667"/>
+      <mass value="${body_mass}"/>
+      <!-- <inertia ixx="0.04961541667" ixy="0" ixz="0" iyy="0.04961541667" iyz="0" izz="0.04961541667"/> -->
+      <inertia  ixx="${body_mass*(3*body_radius*body_radius+body_height*body_height)/12}" ixy = "0" ixz = "0"
+            iyy="${body_mass*(3*body_radius*body_radius+body_height*body_height)/12}" iyz = "0"
+            izz="${body_mass*(body_radius*body_radius)/2}" />
     </inertial>
+
+
 
   </link>
 
@@ -69,7 +77,7 @@
   </gazebo>
 
   <joint name="base_link_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.0775" />
+    <origin rpy="0 0 0" xyz="0 0 ${body_height/2}" />
     <parent link="base_link" />
     <child link="chassis_link" />
   </joint>
@@ -91,7 +99,7 @@
   </gazebo>
 
   <joint name="standoff_rod1_link_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.11 0.11 0.1875" />
+    <origin rpy="0 0 0" xyz="${body_radius*0.618} ${body_radius*0.618} ${standoff_height/2+body_height/2}" />
     <parent link="chassis_link" />
     <child link="standoff_rod1_link" />
   </joint>
@@ -102,7 +110,7 @@
   </gazebo>
 
   <joint name="standoff_rod2_link_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.11 0.11 0.1875" />
+    <origin rpy="0 0 0" xyz="-${body_radius*0.618} ${body_radius*0.618} ${standoff_height/2+body_height/2}" />
     <parent link="chassis_link" />
     <child link="standoff_rod2_link" />
   </joint>
@@ -112,7 +120,7 @@
   </gazebo>
 
   <joint name="standoff_rod3_link_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.11 -0.11 0.1875" />
+    <origin rpy="0 0 0" xyz="${body_radius*0.618} -${body_radius*0.618} ${standoff_height/2+body_height/2}" />
     <parent link="chassis_link" />
     <child link="standoff_rod3_link" />
   </joint>
@@ -122,7 +130,7 @@
   </gazebo>
 
   <joint name="standoff_rod4_link_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.11 -0.11 0.1875" />
+    <origin rpy="0 0 0" xyz="-${body_radius*0.618} -${body_radius*0.618} ${standoff_height/2+body_height/2}" />
     <parent link="chassis_link" />
     <child link="standoff_rod4_link" />
   </joint>
@@ -135,7 +143,7 @@
   </gazebo>
 
   <joint name="Cup_holder_tray_link_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.3425" />
+    <origin rpy="0 0 0" xyz="0 0 ${body_height/2+standoff_height+cup_holde_tray_height/2}" />
     <parent link="chassis_link" />
     <child link="Cup_holder_tray_link" />
   </joint>
@@ -156,7 +164,7 @@
 
 
   <joint name="joint_left_wheel" type="continuous">
-    <origin rpy="0 0 0" xyz="0 0.15 -0.06"/>
+    <origin rpy="0 0 0" xyz="0 ${wheel_separation/2} -0.06"/>
     <child link="left_wheel"/>
     <parent link="chassis_link"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
@@ -174,7 +182,7 @@
   </gazebo>
 
   <joint name="joint_right_wheel" type="continuous">  
-    <origin rpy="0 0 0" xyz="0 -0.15 -0.06"/>
+    <origin rpy="0 0 0" xyz="0 -${wheel_separation/2} -0.06"/>
     <child link="right_wheel"/>
     <parent link="chassis_link"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
@@ -445,8 +453,8 @@
       <right_joint>joint_right_wheel</right_joint>
 
       <!-- kinematics -->
-      <wheel_separation>0.3</wheel_separation>
-      <wheel_diameter>0.0704</wheel_diameter>
+      <wheel_separation>${wheel_separation}</wheel_separation>
+      <wheel_diameter>${wheel_radius*2}</wheel_diameter>
 
       <!-- limits -->
       <max_wheel_torque>1.0</max_wheel_torque>

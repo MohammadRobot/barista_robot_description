@@ -3,6 +3,7 @@
 
 <xacro:property name="cup_holde_tray_radius" value="0.178"/>
 <xacro:property name="cup_holde_tray_height" value="0.09"/>
+<xacro:property name="cup_holde_tray_mass" value="2"/>
 
 
 <!-- Cup holder tray -->
@@ -22,8 +23,11 @@
     </collision>
 
     <inertial>
-      <mass value="2"/>
-      <inertia ixx="0.005064" ixy="0" ixz="0" iyy="0.005064" iyz="0" izz="0.0081"/>
+      <mass value="${cup_holde_tray_mass}"/>
+      <!-- <inertia ixx="0.005064" ixy="0" ixz="0" iyy="0.005064" iyz="0" izz="0.0081"/> -->
+      <inertia  ixx="${cup_holde_tray_mass*(3*cup_holde_tray_radius*cup_holde_tray_radius+cup_holde_tray_height*cup_holde_tray_height)/12}" ixy = "0" ixz = "0"
+            iyy="${cup_holde_tray_mass*(3*cup_holde_tray_radius*cup_holde_tray_radius+cup_holde_tray_height*cup_holde_tray_height)/12}" iyz = "0"
+            izz="${cup_holde_tray_mass*(cup_holde_tray_radius*cup_holde_tray_radius)/2}" />
     </inertial>
 
   </link>
