@@ -3,7 +3,7 @@
 
 <xacro:property name="standoff_radius" value="0.01"/>
 <xacro:property name="standoff_height" value="0.22"/>
-<xacro:property name="standoff_mass" value="0.1"/>
+<xacro:property name="standoff_mass" value="0.2"/>
 
 <!-- standoff rods macro -->
 <xacro:macro name="standoff" params="standoff_rod_name">
