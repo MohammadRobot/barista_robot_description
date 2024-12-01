@@ -62,7 +62,7 @@ Visualization Manager:
         Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_description
+        Value: /barista_robot/robot_description
       Enabled: true
       Links:
         All Links Enabled: true
@@ -269,7 +269,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /scan
+        Value: /barista_robot/scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -319,7 +319,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2.5484228134155273
+      Distance: 4.009992599487305
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -337,7 +337,7 @@ Visualization Manager:
       Pitch: 0.5953977704048157
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.408572196960449
+      Yaw: 4.403572082519531
     Saved: ~
 Window Geometry:
   Displays:

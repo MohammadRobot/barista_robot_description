@@ -8,7 +8,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess, IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import Command
+from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_prefix
 
@@ -28,7 +28,16 @@ def generate_launch_description():
     # robot_desc_path = os.path.join(get_package_share_directory(package_description), "urdf", urdf_file)
     robot_desc_path = os.path.join(get_package_share_directory(package_description), "xacro", xacro_file)
 
+    # Robot State Publisher
 
+    # robot_state_publisher_node = Node(
+    #     package='robot_state_publisher',
+    #     executable='robot_state_publisher',
+    #     name='my_robot_state_publisher_node',
+    #     emulate_tty=True,
+    #     parameters=[{'use_sim_time': True, 'robot_description': Command(['xacro ', robot_desc_path])}],
+    #     output="screen"
+    # )
 
     # RVIZ Configuration
     rviz_config_dir = os.path.join(get_package_share_directory(package_description), 'rviz', 'urdf_vis.rviz')
@@ -70,6 +79,8 @@ def generate_launch_description():
     print("GAZEBO MODELS PATH=="+str(os.environ["GAZEBO_MODEL_PATH"]))
     print("GAZEBO PLUGINS PATH=="+str(os.environ["GAZEBO_PLUGIN_PATH"]))
 
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+
     # Gazebo launch
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -77,40 +88,55 @@ def generate_launch_description():
         )
     )    
 
-    # Position and orientation
-    # [X, Y, Z]
-    position = [0.0, 0.0, 0.2]
-    # [Roll, Pitch, Yaw]
-    orientation = [0.0, 0.0, 0.0]
-    # Base Name or robot
-    robot_name = "barista_robot"
+    # # Position and orientation
+    # # [X, Y, Z]
+    # position = [0.0, 0.0, 0.2]
+    # # [Roll, Pitch, Yaw]
+    # orientation = [0.0, 0.0, 0.0]
+    # # Base Name or robot
+    # robot_base_name = "barista_robot"
 
 
-    entity_name = robot_name+"_"+str(int(random.random()*100000))
+    # entity_name = robot_base_name+"-"+str(int(random.random()*100000))
 
-    # Robot State Publisher
 
-    robot_state_publisher_node = Node(
+    robot_name_1 = "barista_robot1"
+    robot_name_2 = "barista_robot2"
+
+    rsp_robot1 = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        name='my_robot_state_publisher_node',
-        namespace=robot_name,
-        emulate_tty=True,
-        parameters=[{'use_sim_time': True,
-                    'robot_description': Command(['xacro ', robot_desc_path, ' robot_name:=', robot_name])}],
+        name='robot_state_publisher',
+        namespace=robot_name_1,
+        parameters=[{'frame_prefix': robot_name_1+'/', 'use_sim_time': use_sim_time,
+                     'robot_description': Command(['xacro ', robot_desc_path, ' robot_name:=', robot_name_1])}],
+        output="screen"
+    )
+
+    rsp_robot2 = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        namespace=robot_name_2,
+        parameters=[{'frame_prefix': robot_name_2+'/', 'use_sim_time': use_sim_time,
+                     'robot_description': Command(['xacro ', robot_desc_path, ' robot_name:=', robot_name_2])}],
         output="screen"
     )
 
     # Spawn ROBOT Set Gazebo
-    spawn_robot = Node(
+
+    spawn_robot1 = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        name='spawn_entity',
-        output='screen',
-        arguments=['-entity', entity_name,
-                   '-x', str(position[0]), '-y', str(position[1]), '-z', str(position[2]),
-                   '-R', str(orientation[0]), '-P', str(orientation[1]), '-Y', str(orientation[2]),
-                   '-topic', robot_name+'/robot_description']
+        arguments=['-entity', 'robot1', '-x', '0.0', '-y', '0.0', '-z', '0.0',
+                   '-topic', robot_name_1+'/robot_description']
+    )
+
+    spawn_robot2 = Node(
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        arguments=['-entity', 'robot2', '-x', '1.0', '-y', '1.0', '-z', '0.0',
+                   '-topic', robot_name_2+'/robot_description']
     )
 
     # create and return launch description object
@@ -120,8 +146,11 @@ def generate_launch_description():
             default_value=[os.path.join(pkg_barista_robot_gazebo, 'worlds', 'barista_robot_empty.world'), ''],
             description='SDF world file'),        
             gazebo,
-            robot_state_publisher_node,
+            # robot_state_publisher_node,
             rviz_node,
-            spawn_robot
+            rsp_robot1,
+            rsp_robot2,
+            spawn_robot1,
+            spawn_robot2
         ]
     )
