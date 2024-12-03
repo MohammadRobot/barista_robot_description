@@ -13,7 +13,7 @@
         <geometry>
             <cylinder radius="${cup_holde_tray_radius}" length="${cup_holde_tray_height}"/>
         </geometry>
-		<material name="blue"/>
+		<material name="${robot_color_rviz}"/>
     </visual>
 
     <collision>

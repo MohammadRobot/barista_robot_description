@@ -2,6 +2,14 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="barista_robot">
 <xacro:property name="robot_name" value="$(arg robot_name)"/>
 
+<xacro:if value="${robot_name == 'rick'}">
+    <xacro:property name="robot_color_rviz" value="blue"/>
+    <xacro:property name="robot_color_gazebo" value="Gazebo/Blue"/>
+</xacro:if>
+<xacro:unless value="${robot_name == 'rick'}">
+    <xacro:property name="robot_color_rviz" value="red"/>
+    <xacro:property name="robot_color_gazebo" value="Gazebo/Red"/>
+</xacro:unless>
 
 <xacro:include filename="$(find barista_robot_description)/xacro/wheel.xacro" />
 <xacro:include filename="$(find barista_robot_description)/xacro/standoff.xacro" />
@@ -52,7 +60,7 @@
         <geometry>
             <cylinder radius="${body_radius}" length="${body_height}"/>
         </geometry>
-		<material name="blue"/>
+		<material name="${robot_color_rviz}"/>
     </visual>
 
     <collision>
@@ -74,7 +82,7 @@
   </link>
 
 	<gazebo reference="chassis_link">
-      <material>Gazebo/Blue</material>
+      <material>${robot_color_gazebo}</material>
   </gazebo>
 
   <joint name="base_link_joint" type="fixed">
@@ -140,7 +148,7 @@
 <xacro:Cup_holder_tray    Cup_holder_tray_name="Cup_holder_tray_link"/>
 
   <gazebo reference="Cup_holder_tray_link">
-      <material>Gazebo/Blue</material>
+      <material>${robot_color_gazebo}</material>
   </gazebo>
 
   <joint name="Cup_holder_tray_link_joint" type="fixed">
@@ -539,7 +547,7 @@
         <always_on>true</always_on>
         <visualize>true</visualize>
         <update_rate>100.0</update_rate>
-        <plugin name="${robot_name}_laser_scan_node" filename="libgazebo_ros_ray_sensor.so">
+        <plugin name="laser_scan_node" filename="libgazebo_ros_ray_sensor.so">
           <ros>
             <namespace>/${robot_name}</namespace>
             <remapping>~/out:=scan</remapping>

@@ -9,6 +9,9 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 # For control
 find_package(ros2_control REQUIRED)
 find_package(gazebo_ros2_control REQUIRED)
@@ -42,6 +45,11 @@ install(
 	xacro
   DESTINATION
     share/${PROJECT_NAME}/
+)
+
+install(PROGRAMS
+  scripts/barista_robot_odom_to_tf_pub.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()
