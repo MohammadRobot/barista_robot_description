@@ -6,10 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /RobotModel1
-        - /RobotModel1/Description Topic1
-        - /TF1
-        - /RobotModel21
+        - /RobotModel_rick1/Description Topic1
+        - /RobotModel_morty1
+        - /LaserScan_morty1
       Splitter Ratio: 0.3274074196815491
     Tree Height: 558
   - Class: rviz_common/Selection
@@ -29,7 +28,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan_rick
 Visualization Manager:
   Class: ""
   Displays:
@@ -155,8 +154,8 @@ Visualization Manager:
       Mass Properties:
         Inertia: false
         Mass: false
-      Name: RobotModel
-      TF Prefix: ""
+      Name: RobotModel_rick
+      TF Prefix: rick
       Update Interval: 0
       Value: true
       Visual Enabled: true
@@ -243,7 +242,7 @@ Visualization Manager:
       Name: TF
       Show Arrows: true
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
         world:
           morty/odom:
@@ -322,7 +321,7 @@ Visualization Manager:
       Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan
+      Name: LaserScan_rick
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -334,7 +333,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /barista_robot1/scan
+        Value: /rick/scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -442,8 +441,8 @@ Visualization Manager:
       Mass Properties:
         Inertia: false
         Mass: false
-      Name: RobotModel2
-      TF Prefix: ""
+      Name: RobotModel_morty
+      TF Prefix: morty
       Update Interval: 0
       Value: true
       Visual Enabled: true
@@ -465,7 +464,7 @@ Visualization Manager:
       Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan2
+      Name: LaserScan_morty
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -477,7 +476,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /barista_robot2/scan
+        Value: /morty/scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -527,7 +526,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.7226227521896362
+      Distance: 4.26515007019043
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

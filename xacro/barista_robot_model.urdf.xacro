@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="barista_robot">
-<xacro:property name="robot_name" value="$(arg robot_name)"/>
+    <xacro:property name="robot_name" value="$(arg robot_name)"/>
 
-<xacro:if value="${robot_name == 'rick'}">
-    <xacro:property name="robot_color_rviz" value="blue"/>
-    <xacro:property name="robot_color_gazebo" value="Gazebo/Blue"/>
-</xacro:if>
-<xacro:unless value="${robot_name == 'rick'}">
-    <xacro:property name="robot_color_rviz" value="red"/>
-    <xacro:property name="robot_color_gazebo" value="Gazebo/Red"/>
-</xacro:unless>
+    <xacro:if value="${robot_name == 'rick'}">
+        <xacro:property name="robot_color_rviz" value="blue"/>
+        <xacro:property name="robot_color_gazebo" value="Gazebo/Blue"/>
+    </xacro:if>
+    <xacro:unless value="${robot_name == 'rick'}">
+        <xacro:property name="robot_color_rviz" value="red"/>
+        <xacro:property name="robot_color_gazebo" value="Gazebo/Red"/>
+    </xacro:unless>
 
-<xacro:include filename="$(find barista_robot_description)/xacro/wheel.xacro" />
-<xacro:include filename="$(find barista_robot_description)/xacro/standoff.xacro" />
-<xacro:include filename="$(find barista_robot_description)/xacro/cup_holder_tray.xacro" />
+    <xacro:include filename="$(find barista_robot_description)/xacro/wheel.xacro" />
+    <xacro:include filename="$(find barista_robot_description)/xacro/standoff.xacro" />
+    <xacro:include filename="$(find barista_robot_description)/xacro/cup_holder_tray.xacro" />
 
-<xacro:arg  name="include_laser" default="true"/>
+    <xacro:arg  name="include_laser" default="true"/>
 
 
-<xacro:property name="body_radius" value="0.178"/>
-<xacro:property name="body_height" value="0.155"/>
-<xacro:property name="body_mass"   value= "5"/>
+    <xacro:property name="body_radius" value="0.178"/>
+    <xacro:property name="body_height" value="0.155"/>
+    <xacro:property name="body_mass"   value= "5"/>
 
-<xacro:property name="wheel_separation" value = "0.3"/>
+    <xacro:property name="wheel_separation" value = "0.3"/>
 
 
         
@@ -76,14 +76,11 @@
             iyy="${body_mass*(3*body_radius*body_radius+body_height*body_height)/12}" iyz = "0"
             izz="${body_mass*(body_radius*body_radius)/2}" />
     </inertial>
-
-
-
   </link>
 
-	<gazebo reference="chassis_link">
+   <gazebo reference="chassis_link">
       <material>${robot_color_gazebo}</material>
-  </gazebo>
+   </gazebo>
 
   <joint name="base_link_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 ${body_height/2}" />

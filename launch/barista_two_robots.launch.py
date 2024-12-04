@@ -156,12 +156,12 @@ def generate_launch_description():
             default_value=[os.path.join(pkg_barista_robot_gazebo, 'worlds', 'barista_robot_empty.world'), ''],
             description='SDF world file'),        
             gazebo,
-            rviz_node,
             rsp_robot1,
             rsp_robot2,
             spawn_robot1,
             spawn_robot2,
             static_tf_pub_1,
-            static_tf_pub_2
+            static_tf_pub_2,
+            rviz_node
         ]
     )
