@@ -39,9 +39,9 @@ install(
     rviz
     launch
     meshes
-    config
+    # config
 	worlds
-	models
+	# models
 	xacro
   DESTINATION
     share/${PROJECT_NAME}/
