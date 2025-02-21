@@ -58,6 +58,6 @@ gazebo -s libgazebo_ros_init.so -s libgazebo_ros_factory.so myworld.world
 - Run this command:
 
 ```bash
-$ chmod 0755 /run/user/1000/
+$ chmod 0700 /run/user/1000/
 ```
 
